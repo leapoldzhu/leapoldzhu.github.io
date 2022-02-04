@@ -1,0 +1,550 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="vscode 编程环境配置针对 vscode 在 windows 上对 C++ 与 Python 的环境配置说明。 C++ 下载 Visual Studio Code 将下载链接的域名替换为 vscode.cdn.azure.cn 以加速下载 VSCode下载加速 - 永恒de记忆 - 博客园 (cnblogs.com)  vscode 中安装 C&#x2F;C++ 插件  安装 mingw 安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vscode Compile Env Configuration">
+<meta property="og:url" content="http://example.com/2022/02/04/vscodeCompileEnvConfig/index.html">
+<meta property="og:site_name" content="Leopold">
+<meta property="og:description" content="vscode 编程环境配置针对 vscode 在 windows 上对 C++ 与 Python 的环境配置说明。 C++ 下载 Visual Studio Code 将下载链接的域名替换为 vscode.cdn.azure.cn 以加速下载 VSCode下载加速 - 永恒de记忆 - 博客园 (cnblogs.com)  vscode 中安装 C&#x2F;C++ 插件  安装 mingw 安装">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/02/04/qpkCIcVgd1av5Xz.png">
+<meta property="og:image" content="https://s2.loli.net/2022/02/04/yX5swl9HZaBAdRW.png">
+<meta property="article:published_time" content="2022-02-04T14:21:56.000Z">
+<meta property="article:modified_time" content="2022-02-04T14:40:25.787Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="vscode">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2022/02/04/qpkCIcVgd1av5Xz.png">
+  
+  
+  <title>Vscode Compile Env Configuration - Leopold</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Leo</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/blogBanner2.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Vscode Compile Env Configuration">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-04 22:21" pubdate>
+        2022年2月4日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Vscode Compile Env Configuration</h1>
+            
+            <div class="markdown-body">
+              <h1 id="vscode-编程环境配置"><a href="#vscode-编程环境配置" class="headerlink" title="vscode 编程环境配置"></a>vscode 编程环境配置</h1><p>针对 vscode 在 windows 上对 C++ 与 Python 的环境配置说明。</p>
+<h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><ol>
+<li><p>下载 <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">Visual Studio Code</a></p>
+<p>将下载链接的域名替换为 <code>vscode.cdn.azure.cn</code> 以加速下载</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lucky-heng/p/15609708.html">VSCode下载加速 - 永恒de记忆 - 博客园 (cnblogs.com)</a></p>
+</li>
+<li><p>vscode 中安装 C&#x2F;C++ 插件</p>
+</li>
+<li><p>安装 <a target="_blank" rel="noopener" href="https://sourceforge.net/projects/mingw-w64/files/">mingw</a></p>
+<p>安装中 x86_64 为 64 位编译器，i686 为 32 位编译器，version 即编译器版本。</p>
+<p>安装完后需要手动添加环境变量，win10 可打开设置后直接搜索 <code>环境变量</code>，将安装路径的 <code>bin</code> 文件夹添加到 <code>path</code> 中。</p>
+</li>
+<li><p>新建项目并测试</p>
+<p>建立 <code>test.cpp</code> ，目录结构如下：</p>
+<div align="center">
+<img src="https://s2.loli.net/2022/02/04/qpkCIcVgd1av5Xz.png" srcset="/img/loading.gif" lazyload style="zoom:25%;" align="center"/>
+</div>
+
+<p>其中，<code>launch.json</code> 与 <code>tasks.json</code> 为自动生成文件。<code>ctrl+shift+p</code> 呼出控制面板，搜索 <code>C/C++:Build and Debug Active File</code>，生成和调试活动文件。可在 debug 界面进行单步调试。</p>
+<hr>
+</li>
+<li><p>安装 <a target="_blank" rel="noopener" href="https://cmake.org/">CMake</a></p>
+<blockquote>
+<p>与 make 相比，cmake 在跨平台方面更具优势。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c3806d2ad1f8">用VSCode和CMake编写调试C&#x2F;C++ - 简书 (jianshu.com)</a></p>
+</li>
+<li><p>生成 CMake </p>
+<blockquote>
+<p>在设置文件中设置 CMake 路径：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs json"><span class="hljs-string">&quot;cmake.cmakePath&quot;</span>: <span class="hljs-string">&quot;&lt;cmake path&gt;&quot;</span><br></code></pre></td></tr></table></figure>
+</blockquote>
+<p>在空文件夹中调用 <code>CMake: Quick Start</code> 后选择编译器，之后根据提示输入相应参数，生成 <code>CMakeLists.txt</code> 文件与 <code>main.cpp</code>，之后使用 <code>CMake: Build Target</code> 进行编译或在 cmd 中使用 <code>cmake ..</code> 命令进行编译（需要加入环境变量），最后通过命令行运行生成的 <code>.exe</code> 文件。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/jiasike/article/details/107474368">VSCode与CMake搭配使用之基本配置_Frank的专栏-CSDN博客_vscode配置cmake</a></p>
+</li>
+<li><p>添加类</p>
+<p>目前看对格式有要求的情况下，比较好的方法是手动建立 <code>.h</code> 和 <code>.cpp</code> 文件，并使用代码片段添加头文件中的 <code>#ifdef</code> 片段：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-string">&quot;C C++ Header&quot;</span>: &#123;<br>	<span class="hljs-attr">&quot;prefix&quot;</span>: <span class="hljs-string">&quot;header&quot;</span>,<br>	<span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;Add #ifndef, #define and #endif&quot;</span>,<br><br>	<span class="hljs-attr">&quot;body&quot;</span>: [<br>		<span class="hljs-string">&quot;#ifndef $&#123;TM_FILENAME_BASE/(.*)/$&#123;1:/upcase&#125;/&#125;_H&quot;</span>,<br>		<span class="hljs-string">&quot;#define $&#123;TM_FILENAME_BASE/(.*)/$&#123;1:/upcase&#125;/&#125;_H&quot;</span>,<br>		<span class="hljs-string">&quot;$0&quot;</span>,<br>		<span class="hljs-string">&quot;&quot;</span>,<br>		<span class="hljs-string">&quot;#endif // $&#123;TM_FILENAME_BASE/(.*)/$&#123;1:/upcase&#125;/&#125;_H&quot;</span><br>	]<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45461426/article/details/105936955">VSCode 自动生成头文件的#ifndef #define #endif_Static H的博客-CSDN博客_vscode生成头文件</a></p>
+</li>
+</ol>
+<h4 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/bpf-1024/p/11597000.html">Visual Studio Code (vscode) 配置 C &#x2F; C++ 环境 - 步平凡 - 博客园 (cnblogs.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c3806d2ad1f8">用VSCode和CMake编写调试C&#x2F;C++ - 简书 (jianshu.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/03640a4caf7e">CMake 简介和 CMake 模板 - 简书 (jianshu.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jiasike/article/details/107474368">VSCode与CMake搭配使用之基本配置_Frank的专栏-CSDN博客_vscode配置cmake</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45461426/article/details/105936955">VSCode 自动生成头文件的#ifndef #define #endif_Static H的博客-CSDN博客_vscode生成头文件</a></li>
+</ul>
+<h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h2><ol>
+<li><p>下载 <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">Visual Studio Code</a></p>
+<p>将下载链接的域名替换为 <code>vscode.cdn.azure.cn</code> 以加速下载</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lucky-heng/p/15609708.html">VSCode下载加速 - 永恒de记忆 - 博客园 (cnblogs.com)</a></p>
+</li>
+<li><p>下载并安装 <a target="_blank" rel="noopener" href="https://www.anaconda.com/">anaconda</a></p>
+</li>
+<li><p>anaconda 环境配置</p>
+<p><a target="_blank" rel="noopener" href="https://mirror.tuna.tsinghua.edu.cn/help/anaconda/">anaconda | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror</a></p>
+<p><a target="_blank" rel="noopener" href="https://conda.io/projects/conda/en/latest/user-guide/cheatsheet.html">Cheat sheet — conda 4.11.0.post34+35cd47952 documentation</a> 常用指令</p>
+</li>
+<li><p>安装插件</p>
+<p>在 vscode 上安装所需插件：</p>
+<ul>
+<li>python，用于支持 python 环境</li>
+<li>jupyter，配合 python 即可在 vscode 中使用 <code>jupyter notebook</code></li>
+<li>Python Environment Manager，现在没有 anaconda extension pack，可以用该插件管理多个 python 环境。正常使用时无需该插件。</li>
+</ul>
+</li>
+<li><p>环境设置</p>
+<p>在配置文件中设置 conda 路径：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-string">&quot;python.condaPath&quot;</span>: <span class="hljs-string">&quot;&lt;conda path&gt;&quot;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>测试与使用</p>
+<p>在工程中点击左下角选择需要的编译环境，或用 <code>ctrl+shift+p</code> 搜索 <code>python: select interpreter</code> 选择编译环境，之后使用 <code>Code Runner</code> 插件或 <code>Run python file in terminal</code> 执行代码。</p>
+<p><strong>Note：</strong> </p>
+<p><em><strong>Q1</strong></em>：在编译时出现 “无法将 <code>conda</code> 识别为…” 报错。</p>
+<p><em><strong>A1</strong></em>：将 conda 路径加入环境变量，配置好后需要重新启动才能在 vscode 的命令行窗口中找到 <code>conda</code> 命令。</p>
+<hr>
+<p><em><strong>Q2</strong></em>：在 vscode powershell 终端直接运行时可能会出现 import 失败的提示，若终端 PS 前没有相应 conda 环境信息，则原因是 powershell 的安全策略默认禁止执行任何 powershell 脚本，导致 conda 环境启动失败。</p>
+<p><em><strong>A2</strong></em>：按 <code>win+x</code> 以管理员权限启动 powershell，运行：</p>
+<p><code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned</code> </p>
+<p>更改权限，此时可在 powershell 中启动 conda 环境。正确环境如下：</p>
+<div align="center">
+<img src="https://s2.loli.net/2022/02/04/yX5swl9HZaBAdRW.png" srcset="/img/loading.gif" lazyload style="zoom: 25%;"/>
+</div>
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/z_dmsd/article/details/107394983">powershell激活conda失败；无法加载文件，因在系统上禁止运行脚本 </a></p>
+</li>
+</ol>
+<h4 id="Ref-1"><a href="#Ref-1" class="headerlink" title="Ref"></a>Ref</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lucky-heng/p/15609708.html">VSCode下载加速 - 永恒de记忆 - 博客园 (cnblogs.com)</a></li>
+</ul>
+<h2 id="好用的插件"><a href="#好用的插件" class="headerlink" title="好用的插件"></a>好用的插件</h2><ul>
+<li><p>LeetCode：力扣插件，需要登陆账号</p>
+</li>
+<li><p>vscode-icons：图标插件，使文件类型更加清晰</p>
+</li>
+<li><p>Bracket Pair Colorizer：括号彩色配对，添加：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-string">&quot;editor.bracketPairColorization.enabled&quot;</span>: <span class="hljs-literal">true</span>,<br><span class="hljs-string">&quot;editor.guides.bracketPairs&quot;</span>:<span class="hljs-string">&quot;active&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>以启用。</p>
+</li>
+<li><p>Code Runner：代码编译器，一键编译</p>
+</li>
+</ul>
+<h4 id="Ref-2"><a href="#Ref-2" class="headerlink" title="Ref"></a>Ref</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40571533/article/details/91888089">vscode的插件使用_c++小白的博客-CSDN博客_vscode插件怎么用</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/r-install/">r_install</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/vscode/">vscode</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/04/toolAndInfoBox/">
+                        <span class="hidden-mobile">Tools and Info Box</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
